@@ -1,17 +1,16 @@
 
-public class Vacia extends Pieza{
-
-	public Vacia() {
-		super();
-	}
+public class Peon extends Pieza{
 
 	@Override
 	public boolean[][] movimientos() {
-		return new boolean[8][8];
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean movimientoPosible(Posicion nuevaPosicion, Tablero t) {
+		// TODO Auto-generated method stub
 		return false;
-	}		
+	}
+
 }
