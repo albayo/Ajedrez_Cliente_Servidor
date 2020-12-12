@@ -14,8 +14,8 @@ public abstract class Pieza {
 		return this.posicion;
 	}
 	public void setPosicion(Posicion p) {  //Comprobar 
-		this.posicion.setX(p.getX());
-		this.posicion.setY(p.getY());
+		this.posicion.setX(p.getNum());
+		this.posicion.setY(p.getLetra());
 	}
 	
 	public boolean getEquipo() {
@@ -71,7 +71,7 @@ public abstract class Pieza {
 	}
 	
 	public boolean mover(Posicion nuevaP,Tablero t) {
-		if(this.movimientosPosibles(t)[nuevaP.getX()][nuevaP.getY()]) {
+		if(this.movimientosPosibles(t)[nuevaP.getNum()][nuevaP.getLetra()]) {
 			t.cambiarPieza(new Vacia(), this.getPosicion());
 			t.cambiarPieza(this, nuevaP);
 			return true;

@@ -7,7 +7,7 @@ public class Tablero {
 		boolean b=false;
 		for(int i=0;i<8;i++) {
 			for(int j=0;j<8;j++) {
-				this.tablero[i][j]=new Casilla(i+1,j+1,b,new Vacia());
+				this.tablero[i][j]=new Casilla(i,j,b,new Vacia());
 				if(b==true) {b=false;}
 				else {b=true;}
 			}
@@ -25,7 +25,11 @@ public class Tablero {
 	}
 	
 	public void cambiarPieza(Pieza p,Posicion pos) {
-		this.tablero[pos.getX()][pos.getY()].setPieza(p);
+		this.tablero[pos.getNum()][pos.getLetra()].setPieza(p);
+	}
+	
+	public Pieza piezaEnCasilla(Posicion p) {
+		return this.tablero[p.getNum()][p.getLetra()].getPieza();
 	}
 	public void posicionInicial() {
 		

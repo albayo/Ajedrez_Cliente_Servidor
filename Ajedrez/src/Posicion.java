@@ -6,10 +6,10 @@ public class Posicion {
 		this.y=x;
 	}
 	
-	public int getX() {
+	public int getNum() {
 		return this.x;
 	}
-	public int getY() {
+	public int getLetra() {
 		return this.y;
 	}
 	public void setX(int x) {
