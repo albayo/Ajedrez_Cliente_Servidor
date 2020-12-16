@@ -4,10 +4,12 @@ public abstract class Pieza {
 	private Posicion posicion;
 	
 	public Pieza() {
-		this(false);
+		this.equipo =false;
+		this.posicion=new Posicion(0,0);
 	}
-	public Pieza(boolean e) {
+	public Pieza(boolean e,Posicion p) {
 		this.equipo=e;
+		this.posicion=p;
 	}
 	
 	public Posicion getPosicion() {

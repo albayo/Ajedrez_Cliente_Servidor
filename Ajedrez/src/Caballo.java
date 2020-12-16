@@ -1,6 +1,9 @@
 
 public class Caballo extends Pieza {
-
+	
+	public Caballo() {
+		super();
+	}
 	@Override
 	public boolean[][] movimientos() {
 		boolean [][] b=new boolean[8][8];
@@ -49,10 +52,13 @@ public class Caballo extends Pieza {
 	@Override
 	public boolean movimientoPosible(Posicion nuevaP, Tablero t) {
 		boolean [][] b=this.movimientos();
-		if(t.getTablero()[nuevaP.getNum()][nuevaP.getLetra()].getPieza().getEquipo()!=this.getEquipo()) {
+		
+		if(t.getTablero()[nuevaP.getNum()][nuevaP.getLetra()].getPieza().getEquipo()!=this.getEquipo() || (t.getTablero()[nuevaP.getNum()][nuevaP.getLetra()].getPieza() instanceof Vacia)) {
 			return b[nuevaP.getNum()][nuevaP.getLetra()];
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 
 }
