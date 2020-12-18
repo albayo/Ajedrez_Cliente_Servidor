@@ -7,33 +7,50 @@ public class Peon extends Pieza{
 		if(this.getEquipo()==true) {
 			if(this.getPosicion().getNum()!=7) {
 				if(this.getPosicion().getNum()==1) {
-					b[this.getPosicion().getNum()][this.getPosicion().getLetra()+2]=true;
+					b[this.getPosicion().getNum()+2][this.getPosicion().getLetra()]=true;
 				}
-				b[this.getPosicion().getNum()][this.getPosicion().getLetra()+1]=true;
+				b[this.getPosicion().getNum()+1][this.getPosicion().getLetra()]=true;
 			}
 		}
 		else {
 			if(this.getPosicion().getNum()!=0) {
 				if(this.getPosicion().getNum()==6) {
-					b[this.getPosicion().getNum()][this.getPosicion().getLetra()-2]=true;
+					b[this.getPosicion().getNum()-2][this.getPosicion().getLetra()]=true;
 				}
-				b[this.getPosicion().getNum()][this.getPosicion().getLetra()-1]=true;
+				b[this.getPosicion().getNum()-1][this.getPosicion().getLetra()]=true;
 			}
 		}
-		return b;
+		return this.juntarMatrices(b, this.movComer());
 	}
 
 	@Override
 	public boolean movimientoPosible(Posicion nuevaPosicion, Tablero t) {
-		if(this.movimientos()[nuevaPosicion.getNum()][nuevaPosicion.getLetra()]==true && t.piezaEnCasilla(nuevaPosicion) instanceof Vacia) {
-			return true;
+		if(this.movimientos()[nuevaPosicion.getNum()][nuevaPosicion.getLetra()]==true) {
+			if(this.movComer()[nuevaPosicion.getNum()][nuevaPosicion.getLetra()]==true && !(t.piezaEnCasilla(nuevaPosicion) instanceof Vacia) && t.piezaEnCasilla(nuevaPosicion).getEquipo()!=this.getEquipo()) {
+				return true;
+			}
+			else if(this.movComer()[nuevaPosicion.getNum()][nuevaPosicion.getLetra()]!=true && t.piezaEnCasilla(nuevaPosicion) instanceof Vacia) {
+				return true;
+			}
+			else
+				return false;
 		}
-		else
-			return false;
+		else return false;
 	}
 	
 	public boolean[][] movComer(){
-		return null;//hacer
+		boolean[][] b=new boolean[8][8];
+		Posicion p=this.getPosicion();
+		if(this.getEquipo()==true) {
+			b[p.getNum()+1][p.getLetra()+1]=true;
+			b[p.getNum()+1][p.getLetra()-1]=true;
+			
+		}
+		else {
+			b[p.getNum()-1][p.getLetra()+1]=true;
+			b[p.getNum()-1][p.getLetra()-1]=true;
+		}
+		return b;
 	}
 	
 

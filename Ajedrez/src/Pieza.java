@@ -80,5 +80,16 @@ public abstract class Pieza {
 		}
 			return false;
 	}
+	
+	public boolean[][] juntarMatrices(boolean b1[][], boolean b2[][]){
+		for(int i=0;i<8;i++) {
+			for(int j=0;j<8;j++) {
+				if(b2[i][j]==true) {
+					b1[i][j]=true;
+				}
+			}
+		}
+		return b1;
+	}
 
 }

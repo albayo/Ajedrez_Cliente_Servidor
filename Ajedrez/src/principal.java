@@ -3,16 +3,20 @@ public class principal {
 	public static void main(String[] args) {
 		Tablero t=new Tablero();
 		Peon p=new Peon();
-		p.setEquipo(false);
-		Caballo c=new Caballo();
-		c.setEquipo(false);
-		t.cambiarPieza(c, new Posicion(0,3));
-		t.cambiarPieza(p, new Posicion(2,4));
+		p.setEquipo(true);
+		Peon p1=new Peon();
+		p1.setEquipo(false);
+		t.cambiarPieza(p1, new Posicion(3, 2));
+		t.cambiarPieza(p, new Posicion(2,3));
 		t.getPiezas();
 		separar();
-		matrizboolean(c.movimientos());
+		matrizboolean(p.movimientos());
 		separar();
-		matrizboolean(c.movimientosPosibles(t));
+		matrizboolean(p.movComer());
+		System.out.println(p.movimientoPosible(new Posicion(3, 2), t));
+		System.out.println(p.mover(new Posicion(3, 2), t));
+		t.getPiezas();
+		
 	}
 	public static void matrizboolean(boolean[][] b) {
 		String s="";
