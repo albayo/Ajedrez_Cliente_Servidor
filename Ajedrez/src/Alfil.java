@@ -1,5 +1,9 @@
 
 public class Alfil extends Pieza {
+	
+	public Alfil(Posicion p,boolean e) {
+		super(e,p);
+	}
 
 	@Override
 	public boolean[][] movimientos() {

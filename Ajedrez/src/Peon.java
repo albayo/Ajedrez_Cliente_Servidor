@@ -1,5 +1,9 @@
 
 public class Peon extends Pieza{
+	
+	public Peon(Posicion p,boolean e) {
+		super(e,p);
+	}
 
 	@Override
 	public boolean[][] movimientos() {

@@ -1,8 +1,8 @@
 
 public class Caballo extends Pieza {
 	
-	public Caballo() {
-		super();
+	public Caballo(Posicion p,boolean e) {
+		super(e,p);
 	}
 	@Override
 	public boolean[][] movimientos() {
