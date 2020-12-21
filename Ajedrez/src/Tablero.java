@@ -35,6 +35,7 @@ public class Tablero {
 	}
 	public void posicionInicial() {
 		
+		
 	}
 	public void getPiezas() {
 		String s="";
