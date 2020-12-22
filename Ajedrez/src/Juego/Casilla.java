@@ -1,3 +1,5 @@
+package Juego;
+import Piezas.Pieza;
 
 public class Casilla {
 	private boolean color;

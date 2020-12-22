@@ -1,12 +1,20 @@
+package Juego;
+import java.util.List;
+
+import Piezas.Posicion;
 
 public class principal {
 	public static void main(String[] args) {
-		Tablero t=new Tablero();
+
+		Juego j=new Juego();
+		j.posicionInicial();
 		
-		
-		
-		
-		
+		j.getTablero().getPiezas();
+		List<Posicion>l=j.movimientosPosiblesPieza(j.getTablero().getCasilla(1, 3).getPieza());
+		System.out.println(j.getTablero().getCasilla(1, 3).getPieza().getEquipo());
+		for(Posicion p:l) {
+			System.out.println(p.toString());
+		}
 		
 		
 	}

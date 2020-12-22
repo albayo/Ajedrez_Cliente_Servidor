@@ -1,3 +1,6 @@
+package Piezas;
+import Juego.Casilla;
+import Juego.Tablero;
 
 public abstract class Pieza {
 	private boolean equipo;
@@ -91,5 +94,20 @@ public abstract class Pieza {
 		}
 		return b1;
 	}
+	 public void imprimirPosicionesPosibles(){//MIRAR
+	       boolean [][] posicionesPosibles = movimientos();
+	                      
+	       for (int j = 7; j>=0; j--) {
+	           for (int i = 0; i<8; i++) {
+	               if(posicionesPosibles[i][j]){
+	                   System.out.print("|("+i+","+j+")|");
+	                   continue;
+	               }
+	               System.out.print("| |");
+	           }
+	           System.out.println("");
+	       }
+	   }
+	
 
 }

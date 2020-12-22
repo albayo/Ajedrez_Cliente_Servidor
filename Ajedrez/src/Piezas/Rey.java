@@ -1,3 +1,6 @@
+package Piezas;
+import Juego.Tablero;
+
 public class Rey extends Pieza{
 	
 	public Rey(Posicion p,boolean e) {

@@ -1,3 +1,4 @@
+package Piezas;
 
 public class Posicion {
 	int x,y;
@@ -5,7 +6,10 @@ public class Posicion {
 		this.x=x;
 		this.y=y;
 	}
-	
+	public void setPosicion(int i,int j) {
+		this.x=i;
+		this.y=j;
+	}
 	public int getNum() {
 		return this.x;
 	}
@@ -17,5 +21,8 @@ public class Posicion {
 	}
 	public void setY(int y) {
 		this.y=y;
+	}
+	public String toString() {
+		return ("("+this.x+","+this.y+")");
 	}
 }

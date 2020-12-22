@@ -1,3 +1,5 @@
+package Piezas;
+import Juego.Tablero;
 
 public class Torre extends Pieza{
 	
