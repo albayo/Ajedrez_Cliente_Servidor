@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,28 +40,53 @@ public class InterfazGrafica extends JPanel{
 					botones[i][j].setEnabled(false);
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Peon) {
-					botones[i][j].setText("P");
+					if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\peonb.png"));
+					else {
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\peonn.png"));
+					}
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Torre) {
-					botones[i][j].setText("T");
+					//botones[i][j].setText("T");
+					if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\torreb.png"));
+					else {
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\torren.png"));
+					}
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Alfil) {
-					botones[i][j].setText("A");
+					if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\alfilb.png"));
+					else {
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\alfiln.png"));
+					}
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Caballo) {
-					botones[i][j].setText("C");
+					if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\caballob.png"));
+					else {
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\caballon.png"));
+					}
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Rey) {
-					botones[i][j].setText("R");
+					if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\reyb.png"));
+					else {
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\reyn.png"));
+					}
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Dama) {
-					botones[i][j].setText("D");
+					if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\reinab.png"));
+					else {
+						botones[i][j].setIcon(new ImageIcon("C:\\Users\\16alv\\git\\Ajedrez\\reinan.png"));
+					}
 				}
 				
 				// SE CREAN LOS BOTONES Y SE ESTABLECE SU TAMAÑO PREFERIDO
 				botones[i][j].setPreferredSize(new Dimension(50, 50));
 				if ((i + j + 1) % 2 == 0) {
-					botones[i][j].setBackground(Color.BLACK);
+					botones[i][j].setBackground(Color.gray);
 				}
 				
 				botones[i][j].addMouseListener(oyente);
