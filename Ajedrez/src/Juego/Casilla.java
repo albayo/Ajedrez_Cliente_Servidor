@@ -2,19 +2,19 @@ package Juego;
 import Piezas.Pieza;
 
 public class Casilla {
-	private boolean color;
+	//private boolean color;
 	private Pieza pieza;
 	private int letra,num;
 	
-	public Casilla(int num,int letra,boolean color,Pieza p) {
-		this.color=color;
+	public Casilla(int num,int letra,Pieza p) {
+		
 		this.pieza=p;
 		this.letra=letra;
 		this.num=num;
 	}
-	public boolean getColor() {
-		return this.color;
-	}
+//	public boolean getColor() {
+//		return this.color;
+//	}
 	
 	public Pieza getPieza() {
 		return this.pieza;

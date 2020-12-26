@@ -12,15 +12,13 @@ public class Tablero {
 	
 	public Tablero() {
 		this.tablero=new Casilla[8][8];
-		boolean b=false;
+	
 		for(int i=0;i<8;i++) {
 			for(int j=0;j<8;j++) {
-				this.tablero[i][j]=new Casilla(i,j,b,new Vacia());
-				if(b==true) {b=false;}
-				else {b=true;}
+				this.tablero[i][j]=new Casilla(i,j,new Vacia());
+				
 			}
-			if(b==true) {b=false;}
-			else {b=true;}
+			
 		}
 	}
 	
