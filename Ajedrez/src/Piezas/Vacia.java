@@ -3,6 +3,9 @@ import Juego.Tablero;
 
 public class Vacia extends Pieza{
 
+	public Vacia(Posicion p) {
+		super(false,p);
+	}
 	public Vacia() {
 		super();
 	}

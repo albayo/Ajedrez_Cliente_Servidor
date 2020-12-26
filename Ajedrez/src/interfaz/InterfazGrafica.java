@@ -17,6 +17,7 @@ import Piezas.Alfil;
 import Piezas.Caballo;
 import Piezas.Dama;
 import Piezas.Peon;
+import Piezas.Posicion;
 import Piezas.Rey;
 import Piezas.Torre;
 import Piezas.Vacia;
@@ -39,7 +40,7 @@ public class InterfazGrafica extends JPanel{
 			for (int j = 0; j < botones[i].length; j++) {
 				botones[i][j] = new JButton();
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Vacia) {
-					botones[i][j].setEnabled(false);
+//					botones[i][j].setEnabled(false);
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Peon) {
 					if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)
@@ -115,8 +116,8 @@ public class InterfazGrafica extends JPanel{
                 casillaMov = new Casilla[2];
                 casillaMov[0] = this.casilla;
                 casillaMov[1] = null;
-                System.out.println("Primera casilla "+ casillaMov[0].getPieza().getPosicion().getNum() 
-                        +"," +  casillaMov[0].getPieza().getPosicion().getLetra() );
+                System.out.println("Primera casilla "+ casillaMov[0].getNum() 
+                        +"," +  casillaMov[0].getLetra() );
                 System.out.println("Pieza: ");
                 
                 if(casillaMov[0].getPieza() instanceof Dama)
@@ -138,8 +139,8 @@ public class InterfazGrafica extends JPanel{
                 
             } else if(casillaMov[1] == null){
                 casillaMov[1] = this.casilla;
-                System.out.println("Segunda casilla "+ casillaMov[1].getPieza().getPosicion().getNum() 
-                        +"," +  casillaMov[1].getPieza().getPosicion().getLetra() );
+                System.out.println("Segunda casilla "+ casillaMov[1].getNum() 
+                        +"," +  casillaMov[1].getLetra() );
 
 
                 if(casillaMov[1].getPieza() instanceof Dama)
@@ -158,7 +159,7 @@ public class InterfazGrafica extends JPanel{
                     System.out.println("Alfil");
 
                 try{
-                    juego.moverPieza(casillaMov[0].getPieza(), casillaMov[1].getPieza().getPosicion());
+                    System.out.println(juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra())));
                     casillaMov = null;
                     pintarTablero(juego); //Implementar metodo para ir pintando el tablero cambiado
                } catch(RuntimeException ex){
@@ -216,9 +217,10 @@ public class InterfazGrafica extends JPanel{
 
 	for (int i = 0; i < botones.length; i++) {
 		for (int j = 0; j < botones[i].length; j++) {
-			botones[i][j] = new JButton();
+//			botones[i][j] = new JButton();
 			if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Vacia) {
-				botones[i][j].setEnabled(false);
+//				botones[i][j].setEnabled(false);
+				botones[i][j].setIcon(null);
 			}
 			if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Peon) {
 				if(juego.getTablero().getCasilla(i, j).getPieza().getEquipo()==true)

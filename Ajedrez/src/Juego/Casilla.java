@@ -27,10 +27,11 @@ public class Casilla {
 		this.letra=l;
 		this.num=n;
 	}
-	public int[] getUbi() {
-		int i[]=new int[2];
-		i[0]=this.letra;
-		i[1]=this.num;
-		return i;
+	public int getLetra() {
+		return this.letra;
 	}
+	public int getNum() {
+		return this.num;
+	}
+	
 }
