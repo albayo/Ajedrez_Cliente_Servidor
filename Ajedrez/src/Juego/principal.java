@@ -11,11 +11,12 @@ public class principal {
 		
 		j.getTablero().getPiezas();
 		List<Posicion>l=j.movimientosPosiblesPieza(j.getTablero().getCasilla(1, 3).getPieza());
-		System.out.println(j.getTablero().getCasilla(1, 3).getPieza().getEquipo());
 		for(Posicion p:l) {
 			System.out.println(p.toString());
 		}
 		
+		System.out.println(j.moverPieza(j.getTablero().getCasilla(1, 3).getPieza(), new Posicion(2,3)));
+		j.getTablero().getPiezas();
 		
 	}
 	public static void matrizboolean(boolean[][] b) {

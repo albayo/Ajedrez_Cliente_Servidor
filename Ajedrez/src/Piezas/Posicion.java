@@ -25,4 +25,11 @@ public class Posicion {
 	public String toString() {
 		return ("("+this.x+","+this.y+")");
 	}
+	
+	public boolean equals(Object obj) {
+		Posicion p=(Posicion)obj;
+		if(p==this) return true;
+		if(this.x==p.getNum() && this.y==p.getLetra()) return true;
+		else return false;
+	}
 }

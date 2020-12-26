@@ -121,8 +121,10 @@ public class Juego {
 	}
 	
 	public boolean moverPieza(Pieza p,Posicion nueva) {
-		if(this.movimientosPosiblesPieza(p).contains(nueva)) {
-			return p.mover(nueva, t);
+		List<Posicion>l=this.movimientosPosiblesPieza(p);
+		for(Posicion po:l) {
+			if(po.equals(nueva))
+				return p.mover(nueva, t);
 		}
 		return false;		
 		

@@ -48,13 +48,20 @@ public class Peon extends Pieza{
 		boolean[][] b=new boolean[8][8];
 		Posicion p=this.getPosicion();
 		if(this.getEquipo()==true) {
-			b[p.getNum()+1][p.getLetra()+1]=true;
-			b[p.getNum()+1][p.getLetra()-1]=true;
-			
+			if(p.getNum()<7 && p.getLetra()<7) {
+				b[p.getNum()+1][p.getLetra()+1]=true;
+			}
+			if(p.getNum()<7 && p.getLetra()>0) {
+				b[p.getNum()+1][p.getLetra()-1]=true;
+			}						
 		}
 		else {
-			b[p.getNum()-1][p.getLetra()+1]=true;
-			b[p.getNum()-1][p.getLetra()-1]=true;
+			if(p.getNum()>0 && p.getLetra()<7) {
+				b[p.getNum()-1][p.getLetra()+1]=true;
+			}
+			if(p.getNum()>0 && p.getLetra()>0) {
+				b[p.getNum()-1][p.getLetra()-1]=true;
+			}	
 		}
 		return b;
 	}
