@@ -95,7 +95,7 @@ public class InterfazGrafica extends JPanel{
 				botones[i][j].addMouseListener(new ManejadorDeClicks(juego.getTablero().getCasilla(i, j)));
 					
 					
-				//asd
+			
 				add(botones[i][j]);
 			}
 			setLayout(new GridLayout(8, 8));
