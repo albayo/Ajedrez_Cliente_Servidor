@@ -134,7 +134,7 @@ public class InterfazGrafica extends JPanel{
                     System.out.println("Torre");
                 if(casillaMov[0].getPieza() instanceof Alfil)
                     System.out.println("Alfil");
-                casillaMov[0].getPieza().imprimirPosicionesPosibles();
+                casillaMov[0].getPieza().imprimirPosicionesPosibles(juego.getTablero());
                         
                 
             } else if(casillaMov[1] == null){

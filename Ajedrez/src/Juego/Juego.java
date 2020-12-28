@@ -80,15 +80,18 @@ public class Juego {
 		
          Pieza piezaAMover = actual.getPieza();
          Pieza piezaAReemplazar = destino.getPieza();
-         Posicion posActual = piezaAMover.getPosicion();
-         Posicion posDestino = piezaAReemplazar.getPosicion();
+         Posicion posActual = new Posicion(actual.getNum(),actual.getLetra());
+         Posicion posDestino = new Posicion(destino.getNum(),destino.getLetra());
          boolean movimientoAJaque = false;
         
     
          if(piezaAMover.mover(posDestino, t)){
            
                 
-             if (estarEnJaque(piezaAMover.getEquipo()))  movimientoAJaque = true;
+             if (estarEnJaque(piezaAMover.getEquipo())) {
+            	 System.out.println("PROTEGE AL REY BRO");
+            	 movimientoAJaque = true;
+             }
              
              piezaAMover.setPosicion(posActual);
              piezaAReemplazar.setPosicion(posDestino);
@@ -123,8 +126,9 @@ public class Juego {
 	public boolean moverPieza(Pieza p,Posicion nueva) {
 		List<Posicion>l=this.movimientosPosiblesPieza(p);
 		for(Posicion po:l) {
-			if(po.equals(nueva))
+			if(po.equals(nueva)) {
 				return p.mover(nueva, t);
+			}
 		}
 		return false;		
 		

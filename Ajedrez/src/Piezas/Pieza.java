@@ -94,8 +94,8 @@ public abstract class Pieza {
 		}
 		return b1;
 	}
-	 public void imprimirPosicionesPosibles(){//MIRAR
-	       boolean [][] posicionesPosibles = movimientos();
+	 public void imprimirPosicionesPosibles(Tablero t){//MIRAR
+	       boolean [][] posicionesPosibles = movimientosPosibles(t);
 	                      
 	       for (int j = 7; j>=0; j--) {
 	           for (int i = 0; i<8; i++) {
