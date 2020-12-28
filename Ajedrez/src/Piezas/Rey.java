@@ -44,7 +44,7 @@ public class Rey extends Pieza{
 
 	public boolean movimientoPosible(Posicion nuevaPosicion, Tablero t) {
 		boolean[][] b=this.movimientos();
-		if(b[nuevaPosicion.getNum()][nuevaPosicion.getLetra()]==true && t.piezaEnCasilla(nuevaPosicion).getEquipo()!=this.getEquipo()) {
+		if((t.piezaEnCasilla(nuevaPosicion) instanceof Vacia) || (b[nuevaPosicion.getNum()][nuevaPosicion.getLetra()]==true && t.piezaEnCasilla(nuevaPosicion).getEquipo()!=this.getEquipo())) {
 			return true;
 		}
 		else

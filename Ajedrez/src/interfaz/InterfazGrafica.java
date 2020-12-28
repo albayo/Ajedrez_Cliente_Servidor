@@ -116,25 +116,31 @@ public class InterfazGrafica extends JPanel{
                 casillaMov = new Casilla[2];
                 casillaMov[0] = this.casilla;
                 casillaMov[1] = null;
-                System.out.println("Primera casilla "+ casillaMov[0].getNum() 
-                        +"," +  casillaMov[0].getLetra() );
-                System.out.println("Pieza: ");
-                
-                if(casillaMov[0].getPieza() instanceof Dama)
-                    System.out.println("Reina");
-                if(casillaMov[0].getPieza() instanceof Vacia)
-                    System.out.println("NoPieza");
-                if(casillaMov[0].getPieza() instanceof Rey)
-                    System.out.println("Rey");
-                if(casillaMov[0].getPieza() instanceof Peon)
-                    System.out.println("Peon");
-                if(casillaMov[0].getPieza() instanceof Caballo)
-                    System.out.println("Caballo");
-                if(casillaMov[0].getPieza() instanceof Torre)
-                    System.out.println("Torre");
-                if(casillaMov[0].getPieza() instanceof Alfil)
-                    System.out.println("Alfil");
-                casillaMov[0].getPieza().imprimirPosicionesPosibles(juego.getTablero());
+                if(!(casillaMov[0].getPieza() instanceof Vacia) && casillaMov[0].getPieza().getEquipo()==juego.getTurno()) {
+                	System.out.println("Primera casilla "+ casillaMov[0].getNum() 
+                			+"," +  casillaMov[0].getLetra() );
+                	System.out.println("Pieza: ");
+
+                	if(casillaMov[0].getPieza() instanceof Dama)
+                		System.out.println("Reina");
+                	if(casillaMov[0].getPieza() instanceof Vacia)
+                		System.out.println("NoPieza");
+                	if(casillaMov[0].getPieza() instanceof Rey)
+                		System.out.println("Rey");
+                	if(casillaMov[0].getPieza() instanceof Peon)
+                		System.out.println("Peon");
+                	if(casillaMov[0].getPieza() instanceof Caballo)
+                		System.out.println("Caballo");
+                	if(casillaMov[0].getPieza() instanceof Torre)
+                		System.out.println("Torre");
+                	if(casillaMov[0].getPieza() instanceof Alfil)
+                		System.out.println("Alfil");
+//                	casillaMov[0].getPieza().imprimirPosicionesPosibles(juego.getTablero());
+                }
+                else {
+                	System.out.println("Mueve una pieza de tu equipo");
+                	casillaMov=null;
+                }
                         
                 
             } else if(casillaMov[1] == null){
@@ -159,9 +165,24 @@ public class InterfazGrafica extends JPanel{
                     System.out.println("Alfil");
 
                 try{
-                    System.out.println(juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra())));
-                    casillaMov = null;
-                    pintarTablero(juego); //Implementar metodo para ir pintando el tablero cambiado
+                	
+                    if(juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra()))) {
+                    	juego.cambiarTurno();
+                    	pintarTablero(juego);
+                    	if(juego.mate(juego.getTurno())) {
+                       		if(juego.getTurno())
+                       			System.out.println("GANAN NEGRAS");
+                       		else
+                       			System.out.println("GANAN BLANCAS");
+                        }
+                        else if(juego.estarEnJaque(juego.getTurno()))
+                        	System.out.println("ESTAS EN JAQUE");
+                        else if(juego.ahogado(juego.getTurno()))
+                        	System.out.println("AHOGADO----TABLAS");
+                    }
+                    casillaMov = null;                    
+                    
+                	
                } catch(RuntimeException ex){
                     System.out.println("¡Algo pasó!");
                 }
@@ -201,10 +222,9 @@ public class InterfazGrafica extends JPanel{
 				InterfazGrafica i=new InterfazGrafica();
 				ventana.add(i);
 				ventana.pack();
-				ventana.setVisible(true);
-				
-			
+				ventana.setVisible(true);	
 	}
+	
 	
 	public JButton click(MouseEvent e) {
 		return (JButton) e.getComponent();

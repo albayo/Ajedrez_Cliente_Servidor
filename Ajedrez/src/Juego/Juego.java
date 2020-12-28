@@ -89,7 +89,6 @@ public class Juego {
            
                 
              if (estarEnJaque(piezaAMover.getEquipo())) {
-            	 System.out.println("PROTEGE AL REY BRO");
             	 movimientoAJaque = true;
              }
              
@@ -117,6 +116,21 @@ public class Juego {
 		return false;
 	}
 	
+	public boolean ahogado(boolean e) {
+		if(!estarEnJaque(e)) {
+			List<Pieza> l=this.getTablero().getPiezasColor(e);
+			
+			for(Pieza p:l) {
+				if(this.movimientosPosiblesPieza(p).size()!=0) {
+					return false;
+				}
+			
+			}
+			return true;
+		}
+		return false;
+		
+	}
 	public void partida() {
 		while(!mate(this.turno)) {
 			
@@ -127,14 +141,21 @@ public class Juego {
 		List<Posicion>l=this.movimientosPosiblesPieza(p);
 		for(Posicion po:l) {
 			if(po.equals(nueva)) {
-				return p.mover(nueva, t);
+				if(p.mover(nueva, t)) {
+					if(p instanceof Peon && (nueva.getNum()==0 || nueva.getNum()==7)) {
+						this.t.cambiarPieza(new Dama(nueva,p.getEquipo()), nueva);
+					}
+					return true;
+				}
 			}
 		}
 		return false;		
 		
 	}
 	
-	public void menuMover() {
-		this.t.getPiezas();
+	
+	public boolean getTurno() {
+		return this.turno;
 	}
+	
 }
