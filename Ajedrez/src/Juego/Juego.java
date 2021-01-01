@@ -14,9 +14,26 @@ import Piezas.Torre;
 public class Juego {
 	private Tablero t;
 	private boolean turno;//TRUE=BLANCAS FALSE=NEGRAS
+	private boolean b00,b000,n00,n000;
 	public Juego() {
 		this.t=new Tablero();
 		this.turno=true;
+		this.b00=true;
+		this.b000=true;
+		this.n00=true;
+		this.n000=true;
+	}
+	public boolean getb00(){
+		return this.b00;
+	}
+	public boolean getb000() {
+		return this.b000;
+	}
+	public boolean getn00() {
+		return this.n00;
+	}
+	public boolean getn000() {
+		return this.n000;
 	}
 	public Tablero getTablero() {
 		return this.t;
@@ -66,6 +83,18 @@ public class Juego {
 	public List<Posicion> movimientosPosiblesPieza(Pieza p){
 		List<Posicion> l=new ArrayList<>();
 		boolean [][] b=p.movimientosPosibles(t);
+//		if(p instanceof Rey) {
+//			//ENROQUE
+//			if(p.getEquipo()==true && p.getPosicion().getNum()==0 && p.getPosicion().getLetra()==3) {
+//				if(b00==true)l.add(new Posicion(0,1));
+//				if(b000==true)l.add(new Posicion(0,5));	
+//			}
+//			if(p.getEquipo()==false && p.getPosicion().getNum()==7 && p.getPosicion().getLetra()==3) {
+//				if(n00==true)l.add(new Posicion(7,1));
+//				if(n000==true)l.add(new Posicion(7,5));
+//				
+//			}
+//		}
 		for(int i=0;i<8;i++) {
 			for(int j=0;j<8;j++) {
 				if(b[i][j]==true && !movimientoAJaque(t.getCasilla(p.getPosicion().getNum(), p.getPosicion().getLetra()),t.getCasilla(i, j))) {
@@ -139,11 +168,32 @@ public class Juego {
 	
 	public boolean moverPieza(Pieza p,Posicion nueva) {
 		List<Posicion>l=this.movimientosPosiblesPieza(p);
+		Posicion vieja=p.getPosicion();
 		for(Posicion po:l) {
 			if(po.equals(nueva)) {
+				
 				if(p.mover(nueva, t)) {
 					if(p instanceof Peon && (nueva.getNum()==0 || nueva.getNum()==7)) {
 						this.t.cambiarPieza(new Dama(nueva,p.getEquipo()), nueva);
+					}
+					if(p instanceof Rey) {
+						
+						if(p.getEquipo()==true) { 
+							b00=false; 
+							b000=false;
+							
+							}
+						else { n00=false; n000=false;}
+					}
+					if(p instanceof Torre) {
+						if(p.getEquipo()==true) {
+							if(vieja.getLetra()==0) b00=false;
+							if(vieja.getLetra()==7) b000=false; 
+						}else {
+							if(vieja.getLetra()==0) n00=false;
+							if(vieja.getLetra()==7) n000=false; 
+						}
+					
 					}
 					return true;
 				}

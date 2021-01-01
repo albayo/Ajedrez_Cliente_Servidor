@@ -35,6 +35,13 @@ public class Torre extends Pieza{
 				return true;
 			}
 		}
+		else {
+			if(t.piezaEnCasilla(new Posicion(0,1)) instanceof Rey && nueva.getNum()==0 && nueva.getLetra()==2 &&t.piezaEnCasilla(new Posicion(0,1)).getEquipo()==this.getEquipo()) return true;
+			if(t.piezaEnCasilla(new Posicion(0,5)) instanceof Rey && nueva.getNum()==0 && nueva.getLetra()==4 && t.piezaEnCasilla(new Posicion(0,5)).getEquipo()==this.getEquipo()) return true;
+			
+			if(t.piezaEnCasilla(new Posicion(7,1)) instanceof Rey && nueva.getNum()==7 && nueva.getLetra()==2 && t.piezaEnCasilla(new Posicion(7,1)).getEquipo()==this.getEquipo()) return true;
+			if(t.piezaEnCasilla(new Posicion(7,5)) instanceof Rey && nueva.getNum()==7 && nueva.getLetra()==4 && t.piezaEnCasilla(new Posicion(7,5)).getEquipo()==this.getEquipo()) return true;
+		}
 		return false;
 	
 	}

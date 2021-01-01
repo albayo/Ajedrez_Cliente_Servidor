@@ -112,6 +112,7 @@ public class InterfazGrafica extends JPanel{
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			
 			if(casillaMov == null){
                 casillaMov = new Casilla[2];
                 casillaMov[0] = this.casilla;
@@ -165,10 +166,53 @@ public class InterfazGrafica extends JPanel{
                     System.out.println("Alfil");
 
                 try{
-                	
-                    if(juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra()))) {
+                	boolean enroque=true;
+                	if(casillaMov[0].getPieza() instanceof Rey && casillaMov[0].getLetra()==3) {
+                		if(juego.estarEnJaque(juego.getTurno())) {
+                			enroque=false;
+                		}
+                		else if(casillaMov[1].getNum()==0 && casillaMov[1].getLetra()==1) {
+                			if(juego.getb00()==false) enroque=false;
+                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(0, 2))) enroque =false;
+                		}
+                		else if(casillaMov[1].getNum()==0 && casillaMov[1].getLetra()==5) {
+                			if(juego.getb000()==false) enroque=false;
+                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(0, 4))) enroque =false;
+                		}
+                		else if(casillaMov[1].getNum()==7 && casillaMov[1].getLetra()==1) {
+                			if(juego.getn00()==false) enroque=false;
+                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(7, 2))) enroque =false;
+                		}
+                		else if(casillaMov[1].getNum()==7 && casillaMov[1].getLetra()==5) {
+                			if(juego.getn000()==false) enroque=false;
+                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(7, 4))) enroque =false;
+                		}
+                		
+                	}
+                    if(enroque && juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra()))) {
+                    	if(casillaMov[1].getPieza() instanceof Rey) {
+                    		
+                    		if(casillaMov[1].getLetra()==1 && casillaMov[1].getNum()==0) {
+                    			juego.moverPieza(juego.getTablero().getCasilla(0, 0).getPieza(), new Posicion(0,2));
+                    			
+                    		}
+                    		if(casillaMov[1].getLetra()==5 && casillaMov[1].getNum()==0) {
+                    			juego.moverPieza(juego.getTablero().getCasilla(0, 7).getPieza(), new Posicion(0,4));
+                    			
+                    		}
+                    		if(casillaMov[1].getLetra()==1 && casillaMov[1].getNum()==7) {
+                    			juego.moverPieza(juego.getTablero().getCasilla(7, 0).getPieza(), new Posicion(7,2));
+                    			
+                    		}
+                    		if(casillaMov[1].getLetra()==5 && casillaMov[1].getNum()==7) {
+                    			juego.moverPieza(juego.getTablero().getCasilla(7, 7).getPieza(), new Posicion(7,4));
+                    			
+                    		}
+                    	}
+                    	
                     	juego.cambiarTurno();
                     	pintarTablero(juego);
+                    	
                     	if(juego.mate(juego.getTurno())) {
                        		if(juego.getTurno())
                        			System.out.println("GANAN NEGRAS");
@@ -180,6 +224,7 @@ public class InterfazGrafica extends JPanel{
                         else if(juego.ahogado(juego.getTurno()))
                         	System.out.println("AHOGADO----TABLAS");
                     }
+                    else System.out.println("MUEVE BIEN");
                     casillaMov = null;                    
                     
                 	
