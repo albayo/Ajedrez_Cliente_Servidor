@@ -167,8 +167,8 @@ public class InterfazGrafica extends JPanel{
 
                 try{
                 	boolean enroque=true;
-                	if(casillaMov[0].getPieza() instanceof Rey && casillaMov[0].getLetra()==3) {
-                		if(juego.estarEnJaque(juego.getTurno())) {
+                	if(casillaMov[0].getPieza() instanceof Rey) {
+                		if(juego.estarEnJaque(juego.getTurno()) && (casillaMov[1].getLetra()==1 || casillaMov[1].getLetra()==5)) {
                 			enroque=false;
                 		}
                 		else if(casillaMov[1].getNum()==0 && casillaMov[1].getLetra()==1) {
@@ -179,7 +179,7 @@ public class InterfazGrafica extends JPanel{
                 			if(juego.getb000()==false) enroque=false;
                 			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(0, 4))) enroque =false;
                 		}
-                		else if(casillaMov[1].getNum()==7 && casillaMov[1].getLetra()==1) {
+                		else if(casillaMov[1].getNum()==7 && casillaMov[1].getLetra()==1 ) {
                 			if(juego.getn00()==false) enroque=false;
                 			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(7, 2))) enroque =false;
                 		}
@@ -189,8 +189,8 @@ public class InterfazGrafica extends JPanel{
                 		}
                 		
                 	}
-                    if(enroque && juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra()))) {
-                    	if(casillaMov[1].getPieza() instanceof Rey) {
+                    if(juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra()))) {
+                    	if(enroque && casillaMov[1].getPieza() instanceof Rey) {
                     		
                     		if(casillaMov[1].getLetra()==1 && casillaMov[1].getNum()==0) {
                     			juego.moverPieza(juego.getTablero().getCasilla(0, 0).getPieza(), new Posicion(0,2));

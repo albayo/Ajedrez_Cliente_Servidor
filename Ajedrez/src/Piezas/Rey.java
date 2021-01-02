@@ -25,16 +25,16 @@ public class Rey extends Pieza{
 		}
 		
 		//4 if para las cuatro diagonales
-		if(p.getNum()+1<7 && p.getLetra()+1<7) {
+		if(p.getNum()<7 && p.getLetra()<7) {
 			b[p.getNum()+1][p.getLetra()+1]=true;
 		}
-		if(p.getNum()+1<7 && p.getLetra()-1>0) {
+		if(p.getNum()<7 && p.getLetra()>0) {
 			b[p.getNum()+1][p.getLetra()-1]=true;
 		}
-		if(p.getNum()-1>0 && p.getLetra()+1<7) {
+		if(p.getNum()>0 && p.getLetra()<7) {
 			b[p.getNum()-1][p.getLetra()+1]=true;
 		}
-		if(p.getNum()-1>0 && p.getLetra()-1>0) {
+		if(p.getNum()>0 && p.getLetra()>0) {
 			b[p.getNum()-1][p.getLetra()-1]=true;
 		}
 		//ENROQUE
