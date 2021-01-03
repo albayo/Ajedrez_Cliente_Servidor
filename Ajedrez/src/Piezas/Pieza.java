@@ -1,8 +1,10 @@
 package Piezas;
+import java.io.Serializable;
+
 import Juego.Casilla;
 import Juego.Tablero;
 
-public abstract class Pieza {
+public abstract class Pieza implements Serializable {
 	private boolean equipo;
 	private Posicion posicion;
 	

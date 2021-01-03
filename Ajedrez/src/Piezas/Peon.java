@@ -1,7 +1,10 @@
 package Piezas;
+import java.io.Serializable;
+
 import Juego.Tablero;
 
-public class Peon extends Pieza{
+
+public class Peon extends Pieza implements Serializable {
 	
 	public Peon(Posicion p,boolean e) {
 		super(e,p);

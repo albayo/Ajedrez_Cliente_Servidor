@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +23,8 @@ import Piezas.Rey;
 import Piezas.Torre;
 import Piezas.Vacia;
 
-public class InterfazGrafica extends JPanel{
+public class InterfazGrafica extends JPanel implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Juego juego;
 	private Casilla[] casillaMov;
 	private JButton[][] botones;
@@ -69,6 +71,7 @@ public class InterfazGrafica extends JPanel{
 						botones[i][j].setIcon(new ImageIcon("Ajedrez/src/caballob.png"));
 					else {
 						botones[i][j].setIcon(new ImageIcon("Ajedrez/src/caballon.png"));
+						
 					}
 				}
 				if(juego.getTablero().getCasilla(i, j).getPieza() instanceof Rey) {
@@ -87,7 +90,7 @@ public class InterfazGrafica extends JPanel{
 				}
 				
 				// SE CREAN LOS BOTONES Y SE ESTABLECE SU TAMAÑO PREFERIDO
-				botones[i][j].setPreferredSize(new Dimension(50, 50));
+				botones[i][j].setPreferredSize(new Dimension(60, 60));
 				if ((i + j + 1) % 2 == 0) {
 					botones[i][j].setBackground(Color.GRAY);
 				}
@@ -104,6 +107,25 @@ public class InterfazGrafica extends JPanel{
 
 	}
 	
+	public boolean getTurno() {
+		return this.juego.getTurno();
+	}
+	public void addClick() {
+		for (int i = 0; i < botones.length; i++) {
+			for (int j = 0; j < botones[i].length; j++) {
+				botones[i][j].addMouseListener(new ManejadorDeClicks(juego.getTablero().getCasilla(i, j)));
+			}
+		}
+	}
+	
+	public void ejecutar() {
+		JFrame ventana=new JFrame("Ajedrez");
+		
+		ventana.add(this);
+		ventana.pack();
+		ventana.setVisible(true);	
+	}
+	
 	private class ManejadorDeClicks implements MouseListener{
 		private Casilla casilla;
 		
@@ -112,7 +134,7 @@ public class InterfazGrafica extends JPanel{
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
+			boolean enroque;
 			if(casillaMov == null){
                 casillaMov = new Casilla[2];
                 casillaMov[0] = this.casilla;
@@ -166,9 +188,10 @@ public class InterfazGrafica extends JPanel{
                     System.out.println("Alfil");
 
                 try{
-                	boolean enroque=true;
+                	enroque=true;
                 	if(casillaMov[0].getPieza() instanceof Rey) {
-                		if(juego.estarEnJaque(juego.getTurno()) && (casillaMov[1].getLetra()==1 || casillaMov[1].getLetra()==5)) {
+              
+                		if(juego.estarEnJaque(juego.getTurno()) && (casillaMov[1].getLetra()==1|| casillaMov[1].getLetra()==5)) {
                 			enroque=false;
                 		}
                 		else if(casillaMov[1].getNum()==0 && casillaMov[1].getLetra()==1) {
@@ -263,17 +286,18 @@ public class InterfazGrafica extends JPanel{
 	}
 	
 	public static void main(String[] args) {
-				JFrame ventana=new JFrame("Ajedrez");
 				InterfazGrafica i=new InterfazGrafica();
-				ventana.add(i);
-				ventana.pack();
-				ventana.setVisible(true);	
+				i.ejecutar();
 	}
 	
+	public boolean fin() {
+		return juego.mate(true) || juego.mate(false) || juego.ahogado(true) || juego.ahogado(false);
+	}
 	
 	public JButton click(MouseEvent e) {
 		return (JButton) e.getComponent();
 	}
+	
 	public void pintarTablero(Juego juego) {
 	//JButton[][] botones = new JButton[8][8];
 

@@ -1,6 +1,8 @@
 package Piezas;
 
-public class Posicion {
+import java.io.Serializable;
+
+public class Posicion implements Serializable{
 	int x,y;
 	public Posicion(int x, int y) {
 		this.x=x;

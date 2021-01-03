@@ -1,4 +1,5 @@
 package Juego;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import Piezas.Posicion;
 import Piezas.Rey;
 import Piezas.Vacia;
 
-public class Tablero {
+public class Tablero implements Serializable{
 	private Casilla[][] tablero;
 	
 	public Tablero() {

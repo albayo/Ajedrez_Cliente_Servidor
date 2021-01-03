@@ -1,7 +1,9 @@
 package Juego;
+import java.io.Serializable;
+
 import Piezas.Pieza;
 
-public class Casilla {
+public class Casilla implements Serializable{
 	//private boolean color;
 	private Pieza pieza;
 	private int letra,num;

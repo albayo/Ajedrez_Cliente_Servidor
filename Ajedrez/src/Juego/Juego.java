@@ -1,4 +1,5 @@
 package Juego;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import Piezas.Posicion;
 import Piezas.Rey;
 import Piezas.Torre;
 
-public class Juego {
+public class Juego implements Serializable{
 	private Tablero t;
 	private boolean turno;//TRUE=BLANCAS FALSE=NEGRAS
 	private boolean b00,b000,n00,n000;
