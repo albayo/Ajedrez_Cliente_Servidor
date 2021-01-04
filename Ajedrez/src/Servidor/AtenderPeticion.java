@@ -26,23 +26,32 @@ public class AtenderPeticion implements Runnable{
 		this.con1=s;
 		this.con2=s2;
 	}
-//	public static void main(String[] args) {
-//		//AtenderPeticion a =new AtenderPeticion(new CyclicBarrier(2+1),new Socket());
-//		InterfazGrafica i=new InterfazGrafica();
-//		AtenderPeticion.serializar(i, "Serializar.txt");
-//		InterfazGrafica i2=AtenderPeticion.deserializar("Serializar.txt");
-//		JFrame ventana=new JFrame("Ajedrez");
-//		
-//		ventana.add(i2);
-//		ventana.pack();
-//		ventana.setVisible(true);
-//	}
+	public static void main(String[] args) throws IOException {
+		//AtenderPeticion a =new AtenderPeticion(new CyclicBarrier(2+1),new Socket());
+		InterfazGrafica i=new InterfazGrafica();
+		AtenderPeticion.serializar(i, "Serializar.txt");
+		i=AtenderPeticion.deserializar("Serializar.txt");
+		
+//		FileOutputStream out=new FileOutputStream("Hola.txt");
+//		DataInputStream in=new DataInputStream(new FileInputStream("Serializar.txt"));
+			
+//		AtenderPeticion.recibir(out, in);
+		
+		FileInputStream in= new FileInputStream("Serializar.txt");
+		DataOutputStream out=new DataOutputStream(new FileOutputStream("hola.txt"));
+		
+		AtenderPeticion.leerDeFichero(in, out);
+		i=AtenderPeticion.deserializar("hola.txt");
+		i.ejecutar();
+		
+		
+	}
 	public static void leerDeFichero(FileInputStream in, DataOutputStream out) throws IOException {
 		byte [] buff= new byte[132*32];
 		int leidos=in.read(buff);
 		while(leidos!= -1) {
 			out.write(buff,0,leidos);
-			leidos=in.read();
+			leidos=in.read(buff);
 		}
 	}
 	public static void recibir(FileOutputStream out,DataInputStream in) throws IOException {
@@ -50,7 +59,7 @@ public class AtenderPeticion implements Runnable{
 		int leidos=in.read(buff);
 		while(leidos!= -1) {
 			out.write(buff,0,leidos);
-			leidos=in.read();
+			leidos=in.read(buff);
 		}
 	}
 	public void atenderPeticion() {
@@ -64,14 +73,18 @@ public class AtenderPeticion implements Runnable{
 			
 			FileInputStream fin=new FileInputStream("Serializar.txt");
 			FileOutputStream fout=new FileOutputStream("Serializar.txt");
+			
 			while(!i.fin()) {
 				AtenderPeticion.serializar(i, "Serializar.txt");
-				System.out.println("hola");
+				System.out.println("Serializa");
 				leerDeFichero(fin, out1);
-				
+				System.out.println("lee");
 				recibir(fout,in1);
+				System.out.println("recibe");
 				leerDeFichero(fin, out2);
+				System.out.println("lee2");
 				recibir(fout,in2);
+				System.out.println("recibe2");
 				i=AtenderPeticion.deserializar("Serializar.txt");
 			}
 			
