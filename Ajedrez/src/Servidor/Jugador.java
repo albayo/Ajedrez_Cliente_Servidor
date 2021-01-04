@@ -13,7 +13,8 @@ public class Jugador {
 	private static Integer cont;
 	
 	public static void main(String[] args) {
-		if(cont==null) cont=0;
+		if(cont==null) cont=0; 
+		
 		else cont=1;
 		String n="Serializar.txt";
 		InterfazGrafica i=new InterfazGrafica();
