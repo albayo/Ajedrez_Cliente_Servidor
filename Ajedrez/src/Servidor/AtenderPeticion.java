@@ -27,23 +27,23 @@ public class AtenderPeticion implements Runnable{
 		this.con2=s2;
 	}
 	public static void main(String[] args) throws IOException {
-		//AtenderPeticion a =new AtenderPeticion(new CyclicBarrier(2+1),new Socket());
-		InterfazGrafica i=new InterfazGrafica();
-		AtenderPeticion.serializar(i, "Serializar.txt");
-		i=AtenderPeticion.deserializar("Serializar.txt");
-		
-//		FileOutputStream out=new FileOutputStream("Hola.txt");
-//		DataInputStream in=new DataInputStream(new FileInputStream("Serializar.txt"));
-			
-//		AtenderPeticion.recibir(out, in);
-		
-		FileInputStream in= new FileInputStream("Serializar.txt");
-		DataOutputStream out=new DataOutputStream(new FileOutputStream("hola.txt"));
-		
-		AtenderPeticion.leerDeFichero(in, out);
-		i=AtenderPeticion.deserializar("hola.txt");
-		i.ejecutar();
-		
+//		//AtenderPeticion a =new AtenderPeticion(new CyclicBarrier(2+1),new Socket());
+//		InterfazGrafica i=new InterfazGrafica();
+//		AtenderPeticion.serializar(i, "Serializar.txt");
+//		i=AtenderPeticion.deserializar("Serializar.txt");
+//		
+////		FileOutputStream out=new FileOutputStream("Hola.txt");
+////		DataInputStream in=new DataInputStream(new FileInputStream("Serializar.txt"));
+//			
+////		AtenderPeticion.recibir(out, in);
+//		
+//		FileInputStream in= new FileInputStream("Serializar.txt");
+//		DataOutputStream out=new DataOutputStream(new FileOutputStream("hola.txt"));
+//		
+//		AtenderPeticion.leerDeFichero(in, out);
+//		i=AtenderPeticion.deserializar("hola.txt");
+//		i.ejecutar();
+//		
 		
 	}
 	public static void leerDeFichero(FileInputStream in, DataOutputStream out) throws IOException {
@@ -75,17 +75,21 @@ public class AtenderPeticion implements Runnable{
 			FileOutputStream fout=new FileOutputStream("Serializar.txt");
 			
 			while(!i.fin()) {
-				AtenderPeticion.serializar(i, "Serializar.txt");
+				AtenderPeticion.serializar(i,out1);
 				System.out.println("Serializa");
-				leerDeFichero(fin, out1);
-				System.out.println("lee");
-				recibir(fout,in1);
-				System.out.println("recibe");
-				leerDeFichero(fin, out2);
-				System.out.println("lee2");
-				recibir(fout,in2);
-				System.out.println("recibe2");
-				i=AtenderPeticion.deserializar("Serializar.txt");
+//				leerDeFichero(fin, out1);
+//				System.out.println("lee");
+				i=deserializar(in1);
+				
+				AtenderPeticion.serializar(i,out2);
+				i=deserializar(in2);
+//				recibir(fout,in1);
+//				System.out.println("recibe");
+//				leerDeFichero(fin, out2);
+				//System.out.println("lee2");
+				//recibir(fout,in2);
+				//System.out.println("recibe2");
+				//i=AtenderPeticion.deserializar("Serializar.txt");
 			}
 			
 		} catch (IOException e) {
@@ -93,14 +97,13 @@ public class AtenderPeticion implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	public static void serializar(InterfazGrafica i,String n) {
+	public static void serializar(InterfazGrafica i,DataOutputStream out) {
 		
-		File s2=new File(n);
-		s2.delete();
-		File s=new File(n);
+		
+//		File s=new File(n);
 		try {
-			FileOutputStream f=new FileOutputStream(s);
-			ObjectOutputStream oos =new ObjectOutputStream (f);
+//			FileOutputStream f=new FileOutputStream(s);
+			ObjectOutputStream oos =new ObjectOutputStream (out);
 			oos.writeObject(i);
 			oos.close();
 			} catch (IOException e) {
@@ -108,12 +111,12 @@ public class AtenderPeticion implements Runnable{
 				e.printStackTrace();
 			}
 	}
-	public static InterfazGrafica deserializar(String n) {
-		File s=new File(n);
+	public static InterfazGrafica deserializar(DataInputStream in) {
+	
 		InterfazGrafica i;
 		try {
-			FileInputStream f=new FileInputStream(s);
-			ObjectInputStream oos =new ObjectInputStream (f);
+//			FileInputStream f=new FileInputStream(s);
+			ObjectInputStream oos =new ObjectInputStream (in);
 			//if(oos.se)
 			i=(InterfazGrafica)oos.readObject();
 			i.addClick();

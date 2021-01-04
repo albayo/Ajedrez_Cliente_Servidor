@@ -10,10 +10,23 @@ import java.net.Socket;
 import interfaz.InterfazGrafica;
 
 public class Jugador {
-
+	private static Integer cont;
+	
 	public static void main(String[] args) {
+		if(cont==null) cont=0;
+		else cont=1;
 		String n="Serializar.txt";
 		InterfazGrafica i=new InterfazGrafica();
+		boolean turno=false;
+		System.out.println(cont);
+		if(cont==0) {
+			turno=true;
+			cont++;
+		}
+		else {
+			cont--;
+			turno=false;
+		}
 		try(Socket s =new Socket("localhost",80);	
 			DataOutputStream out=new DataOutputStream(s.getOutputStream());
 			DataInputStream in =new DataInputStream (s.getInputStream());
@@ -21,21 +34,27 @@ public class Jugador {
 			FileOutputStream fout=new FileOutputStream(n);)
 
 		{
+			System.out.println(cont);
+			System.out.println("Jugador "+ (cont));
 			while(!i.fin()) {
-				System.out.println("Soy el 2");
-				i.setEnabled(true);
-				AtenderPeticion.recibir(fout, in);
-				System.out.println("hola");
-				i=AtenderPeticion.deserializar(n);
+				while(cont==0 ) {
+					
+					
+				}
+				i=AtenderPeticion.deserializar(in);
 				i.ejecutar();
 				System.out.println("ejecuta");
-				boolean turno=i.getTurno();
-				if(i.getTurno()!=turno) {
-					i.setEnabled(false);
+				//System.out.println(i.getTurno()+ " "+turno);
+				while(i.getTurno()==turno) {
+					
+					
 				}
-				AtenderPeticion.serializar(i, n);
-				AtenderPeticion.leerDeFichero(fin, out);
-				
+				System.out.println(i.getTurno()+ " "+turno);
+//				i.setEnabled(false);
+				AtenderPeticion.serializar(i, out);
+				System.out.println(cont);
+				if(cont==0 )cont++;
+				if(cont==1)cont--;
 			}
 			
 			
