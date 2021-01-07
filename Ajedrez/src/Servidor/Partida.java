@@ -7,10 +7,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import Juego.Casilla;
 import interfaz.InterfazGrafica;
 
 public class Partida {
 	private InterfazGrafica i;
+	private Casilla[] casillas;
 	private Player j1=null,j2=null;
 	private boolean turno;
 	
@@ -21,7 +23,6 @@ public class Partida {
 		if(j1==null) j1=new Player(s,true);
 		else j2=new Player(s,false);
 		turno=true;
-		i=new InterfazGrafica();
 		
 	}
 	public void addPlayer(Socket s) {
@@ -45,6 +46,8 @@ public class Partida {
 	}
 	
 	public void jugar() {
+		i=new InterfazGrafica();
+		casillas=null;
 		try {
 			ObjectOutputStream out1=new ObjectOutputStream(j1.getSocket().getOutputStream());
 			ObjectInputStream in1=new ObjectInputStream(j1.getSocket().getInputStream());
@@ -52,13 +55,14 @@ public class Partida {
 			ObjectInputStream in2=new ObjectInputStream(j2.getSocket().getInputStream());
 			
 			while(!fin()) {
-				i.setMovido(false);
-				out1.writeObject(i);
-				i=(InterfazGrafica) in1.readObject();
-				
-				i.setMovido(false);
-				out2.writeObject(i);
-				i=(InterfazGrafica) in2.readObject();
+				out1.writeObject(casillas);
+				System.out.println("antes de leer");
+				casillas=(Casilla[]) in1.readObject();
+				i.mover(casillas);
+				System.out.println("primero");
+				out2.writeObject(casillas);
+				casillas=(Casilla[]) in2.readObject();
+				i.mover(casillas);
 				
 			}
 			

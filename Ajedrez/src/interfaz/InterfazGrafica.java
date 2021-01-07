@@ -29,6 +29,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
 	private Juego juego;
 	private boolean movido;
 	private Casilla[] casillaMov;
+	private Casilla[] c;
 	private JButton[][] botones;
 	private JFrame ventana=new JFrame("Ajedrez");
 	
@@ -142,8 +143,10 @@ public class InterfazGrafica extends JPanel implements Serializable{
 	}
 	public void pintar() {
 		ventana.setVisible(true);
-
-		
+	}
+	
+	public Casilla[] getCasillas() {
+		return this.c;
 	}
 
 	private class ManejadorDeClicks implements MouseListener{
@@ -178,7 +181,6 @@ public class InterfazGrafica extends JPanel implements Serializable{
                 		System.out.println("Torre");
                 	if(casillaMov[0].getPieza() instanceof Alfil)
                 		System.out.println("Alfil");
-//                	casillaMov[0].getPieza().imprimirPosicionesPosibles(juego.getTablero());
                 }
                 else {
                 	System.out.println("Mueve una pieza de tu equipo");
@@ -209,69 +211,8 @@ public class InterfazGrafica extends JPanel implements Serializable{
 
                 try{
                 	if(!movido) {
-                	enroque=true;
-                	if(casillaMov[0].getPieza() instanceof Rey) {
-              
-                		if(juego.estarEnJaque(juego.getTurno()) && (casillaMov[1].getLetra()==1|| casillaMov[1].getLetra()==5)) {
-                			enroque=false;
-                		}
-                		else if(casillaMov[1].getNum()==0 && casillaMov[1].getLetra()==1) {
-                			if(juego.getb00()==false) enroque=false;
-                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(0, 2))) enroque =false;
-                		}
-                		else if(casillaMov[1].getNum()==0 && casillaMov[1].getLetra()==5) {
-                			if(juego.getb000()==false) enroque=false;
-                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(0, 4))) enroque =false;
-                		}
-                		else if(casillaMov[1].getNum()==7 && casillaMov[1].getLetra()==1 ) {
-                			if(juego.getn00()==false) enroque=false;
-                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(7, 2))) enroque =false;
-                		}
-                		else if(casillaMov[1].getNum()==7 && casillaMov[1].getLetra()==5) {
-                			if(juego.getn000()==false) enroque=false;
-                			else if(juego.movimientoAJaque(casillaMov[0], juego.getTablero().getCasilla(7, 4))) enroque =false;
-                		}
-                		
-                	}
-                    if(juego.moverPieza(casillaMov[0].getPieza(), new Posicion(casillaMov[1].getNum(),casillaMov[1].getLetra()))) {
-                    	if(enroque && casillaMov[1].getPieza() instanceof Rey) {
-                    		
-                    		if(casillaMov[1].getLetra()==1 && casillaMov[1].getNum()==0) {
-                    			juego.moverPieza(juego.getTablero().getCasilla(0, 0).getPieza(), new Posicion(0,2));
-                    			
-                    		}
-                    		if(casillaMov[1].getLetra()==5 && casillaMov[1].getNum()==0) {
-                    			juego.moverPieza(juego.getTablero().getCasilla(0, 7).getPieza(), new Posicion(0,4));
-                    			
-                    		}
-                    		if(casillaMov[1].getLetra()==1 && casillaMov[1].getNum()==7) {
-                    			juego.moverPieza(juego.getTablero().getCasilla(7, 0).getPieza(), new Posicion(7,2));
-                    			
-                    		}
-                    		if(casillaMov[1].getLetra()==5 && casillaMov[1].getNum()==7) {
-                    			juego.moverPieza(juego.getTablero().getCasilla(7, 7).getPieza(), new Posicion(7,4));
-                    			
-                    		}
-                    	}
-                    	
-                    	juego.cambiarTurno();
-                    	pintarTablero(juego);
-                    	
-                    	
-                    	if(juego.mate(juego.getTurno())) {
-                       		if(juego.getTurno())
-                       			System.out.println("GANAN NEGRAS");
-                       		else
-                       			System.out.println("GANAN BLANCAS");
-                        }
-                        else if(juego.estarEnJaque(juego.getTurno()))
-                        	System.out.println("ESTAS EN JAQUE");
-                        else if(juego.ahogado(juego.getTurno()))
-                        	System.out.println("AHOGADO----TABLAS");
-                    	movido=true;
-                    }
-                    else System.out.println("MUEVE BIEN");
-                    casillaMov = null;                    
+                		c=mover(casillaMov);
+               
                 	}  
                 	
                } catch(RuntimeException ex){
@@ -302,6 +243,79 @@ public class InterfazGrafica extends JPanel implements Serializable{
 			
 		}
 
+	}
+	
+	public Casilla[] mover(Casilla[] cas) {
+		Casilla[] c=new Casilla[2];
+		boolean enroque=true;
+    	if(cas[0].getPieza() instanceof Rey) {
+  
+    		if(juego.estarEnJaque(juego.getTurno()) && (cas[1].getLetra()==1|| cas[1].getLetra()==5)) {
+    			enroque=false;
+    		}
+    		else if(cas[1].getNum()==0 && cas[1].getLetra()==1) {
+    			if(juego.getb00()==false) enroque=false;
+    			else if(juego.movimientoAJaque(cas[0], juego.getTablero().getCasilla(0, 2))) enroque =false;
+    		}
+    		else if(cas[1].getNum()==0 && cas[1].getLetra()==5) {
+    			if(juego.getb000()==false) enroque=false;
+    			else if(juego.movimientoAJaque(cas[0], juego.getTablero().getCasilla(0, 4))) enroque =false;
+    		}
+    		else if(cas[1].getNum()==7 && cas[1].getLetra()==1 ) {
+    			if(juego.getn00()==false) enroque=false;
+    			else if(juego.movimientoAJaque(cas[0], juego.getTablero().getCasilla(7, 2))) enroque =false;
+    		}
+    		else if(cas[1].getNum()==7 && cas[1].getLetra()==5) {
+    			if(juego.getn000()==false) enroque=false;
+    			else if(juego.movimientoAJaque(cas[0], juego.getTablero().getCasilla(7, 4))) enroque =false;
+    		}
+    		
+    	}
+        if(juego.moverPieza(cas[0].getPieza(), new Posicion(cas[1].getNum(),cas[1].getLetra()))) {
+        	if(enroque && cas[1].getPieza() instanceof Rey) {
+        		
+        		if(cas[1].getLetra()==1 && cas[1].getNum()==0) {
+        			juego.moverPieza(juego.getTablero().getCasilla(0, 0).getPieza(), new Posicion(0,2));
+        			
+        		}
+        		if(cas[1].getLetra()==5 && cas[1].getNum()==0) {
+        			juego.moverPieza(juego.getTablero().getCasilla(0, 7).getPieza(), new Posicion(0,4));
+        			
+        		}
+        		if(cas[1].getLetra()==1 && cas[1].getNum()==7) {
+        			juego.moverPieza(juego.getTablero().getCasilla(7, 0).getPieza(), new Posicion(7,2));
+        			
+        		}
+        		if(cas[1].getLetra()==5 && cas[1].getNum()==7) {
+        			juego.moverPieza(juego.getTablero().getCasilla(7, 7).getPieza(), new Posicion(7,4));
+        			
+        		}
+        	}
+        	
+        	juego.cambiarTurno();
+        	pintarTablero(juego);
+        	
+        	
+        	if(juego.mate(juego.getTurno())) {
+           		if(juego.getTurno())
+           			System.out.println("GANAN NEGRAS");
+           		else
+           			System.out.println("GANAN BLANCAS");
+            }
+            else if(juego.estarEnJaque(juego.getTurno()))
+            	System.out.println("ESTAS EN JAQUE");
+            else if(juego.ahogado(juego.getTurno()))
+            	System.out.println("AHOGADO----TABLAS");
+        	this.movido=true;
+        	System.out.println("movido->"+this.movido);
+        	c[0]=cas[0];
+            c[1]=cas[1];
+            casillaMov = null;
+        	return c;
+        }
+        else System.out.println("MUEVE BIEN");
+        casillaMov = null;
+        return null;
 	}
 	
 	public static void main(String[] args) {
