@@ -22,13 +22,22 @@ import Piezas.Posicion;
 import Piezas.Rey;
 import Piezas.Torre;
 import Piezas.Vacia;
+import Servidor.Player;
 
 public class InterfazGrafica extends JPanel implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Juego juego;
+	private boolean movido;
 	private Casilla[] casillaMov;
 	private JButton[][] botones;
+	private JFrame ventana=new JFrame("Ajedrez");
 	
+	public boolean getMovido() {
+		return this.movido;
+	}
+	public void setMovido(boolean b) {
+		this.movido=b;
+	}
 	public InterfazGrafica() {
 		this.juego=new Juego();
 		juego.posicionInicial();
@@ -119,13 +128,14 @@ public class InterfazGrafica extends JPanel implements Serializable{
 	}
 	
 	public void ejecutar() {
-		JFrame ventana=new JFrame("Ajedrez");
+		
 		
 		ventana.add(this);
 		ventana.pack();
-		ventana.setVisible(true);	
+		ventana.setVisible(true);
+		
 	}
-	
+
 	private class ManejadorDeClicks implements MouseListener{
 		private Casilla casilla;
 		
@@ -188,6 +198,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
                     System.out.println("Alfil");
 
                 try{
+                	if(!movido) {
                 	enroque=true;
                 	if(casillaMov[0].getPieza() instanceof Rey) {
               
@@ -236,6 +247,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
                     	juego.cambiarTurno();
                     	pintarTablero(juego);
                     	
+                    	
                     	if(juego.mate(juego.getTurno())) {
                        		if(juego.getTurno())
                        			System.out.println("GANAN NEGRAS");
@@ -246,48 +258,48 @@ public class InterfazGrafica extends JPanel implements Serializable{
                         	System.out.println("ESTAS EN JAQUE");
                         else if(juego.ahogado(juego.getTurno()))
                         	System.out.println("AHOGADO----TABLAS");
+                    	movido=true;
                     }
                     else System.out.println("MUEVE BIEN");
                     casillaMov = null;                    
-                    
+                	}  
                 	
                } catch(RuntimeException ex){
                     System.out.println("¡Algo pasó!");
                 }
             }
-
+            
 			
 		}
-
 		@Override
-		public void mousePressed(MouseEvent e) {
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			
 		}
 
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
 	}
 	
 	public static void main(String[] args) {
 				InterfazGrafica i=new InterfazGrafica();
-				i.ejecutar();
+				
+					i.ejecutar();
+					
+				
 	}
 	
 	public boolean fin() {
@@ -354,12 +366,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
 					botones[i][j].setIcon(new ImageIcon("Ajedrez/src/reinan.png"));
 				}
 			}
-			
-//			// SE CREAN LOS BOTONES Y SE ESTABLECE SU TAMAÑO PREFERIDO
-//			botones[i][j].setPreferredSize(new Dimension(50, 50));
-//			if ((i + j + 1) % 2 == 0) {
-//				botones[i][j].setBackground(Color.GRAY);
-//			}
+
 		}
 	}
 	}
