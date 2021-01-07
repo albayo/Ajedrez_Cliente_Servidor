@@ -50,6 +50,7 @@ public class Partida {
 			ObjectInputStream in1=new ObjectInputStream(j1.getSocket().getInputStream());
 			ObjectOutputStream out2=new ObjectOutputStream(j2.getSocket().getOutputStream());
 			ObjectInputStream in2=new ObjectInputStream(j2.getSocket().getInputStream());
+			
 			while(!fin()) {
 				i.setMovido(false);
 				out1.writeObject(i);
@@ -60,9 +61,10 @@ public class Partida {
 				i=(InterfazGrafica) in2.readObject();
 				
 			}
-			if(i.getJuego().mate(true)){
-				out1.writeObject(i);
-			}
+			
+//			if(i.getJuego().mate(true)){
+//				out1.writeObject(i);
+//			}
 			
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

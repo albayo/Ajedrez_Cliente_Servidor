@@ -29,28 +29,28 @@ public class Cliente {
 						
 						mostrado=true;
 					}
-					
+					i.pintar();
 					
 					i.addClick();
-					i.pintar();
+					
 					while(i.getMovido()==false ) {
-						if(i.fin()) break;
+//						if(i.fin()) break;
 					}
 					
 					out.writeObject(i);
 				}
 			}
-			if(i.getJuego().mate(true)){
-
-				System.out.println("GANAN NEGRAS");
-			}
-			else if(i.getJuego().mate(false)){
-
-				System.out.println("GANAN BLANCAS");
-			}
-			else if(i.getJuego().ahogado(true) || i.getJuego().ahogado(false)) {
-				System.out.println("TABLAS");
-			}
+//			if(i.getJuego().mate(true)){
+//
+//				System.out.println("GANAN NEGRAS");
+//			}
+//			else if(i.getJuego().mate(false)){
+//
+//				System.out.println("GANAN BLANCAS");
+//			}
+//			else if(i.getJuego().ahogado(true) || i.getJuego().ahogado(false)) {
+//				System.out.println("TABLAS");
+//			}
 			
 			
 			

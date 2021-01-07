@@ -142,7 +142,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
 	}
 	public void pintar() {
 		ventana.setVisible(true);
-		pintarTablero(juego);
+
 		
 	}
 
@@ -305,11 +305,9 @@ public class InterfazGrafica extends JPanel implements Serializable{
 	}
 	
 	public static void main(String[] args) {
-				InterfazGrafica i=new InterfazGrafica();
-				
-					//i.ejecutar();
-					
-				
+		InterfazGrafica i=new InterfazGrafica();
+		i.mostrar();
+		i.setMovido(false);
 	}
 	
 	public boolean fin() {
