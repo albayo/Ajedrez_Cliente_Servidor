@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import Juego.Casilla;
 import Juego.Juego;
@@ -22,7 +23,6 @@ import Piezas.Posicion;
 import Piezas.Rey;
 import Piezas.Torre;
 import Piezas.Vacia;
-import Servidor.Player;
 
 public class InterfazGrafica extends JPanel implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -111,9 +111,16 @@ public class InterfazGrafica extends JPanel implements Serializable{
 				add(botones[i][j]);
 			}
 			setLayout(new GridLayout(8, 8));
+			
+			
 
 		}
+		
 
+	}
+	
+	public JFrame getVentana() {
+		return ventana;
 	}
 	
 	public boolean getTurno() {
@@ -126,13 +133,16 @@ public class InterfazGrafica extends JPanel implements Serializable{
 			}
 		}
 	}
-	
-	public void ejecutar() {
+	public void mostrar() {
 		
 		
 		ventana.add(this);
 		ventana.pack();
 		ventana.setVisible(true);
+	}
+	public void pintar() {
+		ventana.setVisible(true);
+		pintarTablero(juego);
 		
 	}
 
@@ -297,13 +307,16 @@ public class InterfazGrafica extends JPanel implements Serializable{
 	public static void main(String[] args) {
 				InterfazGrafica i=new InterfazGrafica();
 				
-					i.ejecutar();
+					//i.ejecutar();
 					
 				
 	}
 	
 	public boolean fin() {
 		return juego.mate(true) || juego.mate(false) || juego.ahogado(true) || juego.ahogado(false);
+	}
+	public Juego getJuego() {
+		return this.juego;
 	}
 	
 	public JButton click(MouseEvent e) {

@@ -25,6 +25,7 @@ public class Server2 {
 					con1 = socket.accept();
 					Sala s=new Sala(con1,salas);
 					pool.execute(s);
+					System.out.println("sala");
 				} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

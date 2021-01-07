@@ -3,6 +3,8 @@ package Servidor;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import interfaz.InterfazGrafica;
@@ -11,28 +13,16 @@ public class Partida {
 	private InterfazGrafica i;
 	private Player j1=null,j2=null;
 	private boolean turno;
+	
+	public InterfazGrafica getInterfaz() {
+		return i;
+	}
 	public Partida(Socket s) {
 		if(j1==null) j1=new Player(s,true);
 		else j2=new Player(s,false);
 		turno=true;
 		i=new InterfazGrafica();
-		while(j2==null) {}
-		try {
-			while(!fin()) {
-			
-				if(turno==j1.getColor()) {
-					mover(j1);
-					AtenderPeticion.serializar(i, new DataOutputStream(j2.getSocket().getOutputStream()));
-				}
-				else {
-					mover(j2);
-					AtenderPeticion.serializar(i, new DataOutputStream(j1.getSocket().getOutputStream()));
-				}
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	public void addPlayer(Socket s) {
 		j2=new Player(s,false);
@@ -54,15 +44,32 @@ public class Partida {
 		return i.fin();
 	}
 	
-	
-	public void mover(Player j) throws IOException {
-		InterfazGrafica i2;
-		AtenderPeticion.serializar(i, new DataOutputStream(j.getSocket().getOutputStream()));
-		i2=AtenderPeticion.deserializar(new DataInputStream(j.getSocket().getInputStream()));
-		i2.ejecutar();
-		i2.setMovido(false);
-		i=i2;
-		
+	public void jugar() {
+		try {
+			ObjectOutputStream out1=new ObjectOutputStream(j1.getSocket().getOutputStream());
+			ObjectInputStream in1=new ObjectInputStream(j1.getSocket().getInputStream());
+			ObjectOutputStream out2=new ObjectOutputStream(j2.getSocket().getOutputStream());
+			ObjectInputStream in2=new ObjectInputStream(j2.getSocket().getInputStream());
+			while(!fin()) {
+				i.setMovido(false);
+				out1.writeObject(i);
+				i=(InterfazGrafica) in1.readObject();
+				
+				i.setMovido(false);
+				out2.writeObject(i);
+				i=(InterfazGrafica) in2.readObject();
+				
+			}
+			if(i.getJuego().mate(true)){
+				out1.writeObject(i);
+			}
+			
+		} catch (IOException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	
 
 }

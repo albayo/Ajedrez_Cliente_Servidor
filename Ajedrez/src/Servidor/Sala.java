@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 
+
 import Juego.Juego;
 import interfaz.InterfazGrafica;
 
@@ -21,29 +22,9 @@ public class Sala implements Runnable{
 		this.con=s;
 		this.salas=l;
 	}
-	public static void leerDeFichero(FileInputStream in, DataOutputStream out) throws IOException {
-		byte [] buff= new byte[132*32];
-		int leidos=in.read(buff);
-		while(leidos!= -1) {
-			out.write(buff,0,leidos);
-			leidos=in.read(buff);
-		}
-	}
-	public static void recibir(FileOutputStream out,DataInputStream in) throws IOException {
-		byte [] buff= new byte[132*32];
-		int leidos=in.read(buff);
-		while(leidos!= -1) {
-			out.write(buff,0,leidos);
-			leidos=in.read(buff);
-		}
-	}
 	
 	public static void serializar(InterfazGrafica i,DataOutputStream out) {
-		
-		
-//		File s=new File(n);
 		try {
-//			FileOutputStream f=new FileOutputStream(s);
 			ObjectOutputStream oos =new ObjectOutputStream (out);
 			oos.writeObject(i);
 			oos.close();
@@ -56,12 +37,9 @@ public class Sala implements Runnable{
 	
 		InterfazGrafica i;
 		try {
-//			FileInputStream f=new FileInputStream(s);
 			ObjectInputStream oos =new ObjectInputStream (in);
-			//if(oos.se)
 			i=(InterfazGrafica)oos.readObject();
 			i.addClick();
-			
 			oos.close();
 			return i;
 		} catch (ClassNotFoundException e) {
@@ -78,8 +56,9 @@ public class Sala implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		if(salas.isEmpty()) {
-			Partida p=new Partida(con);
-			salas.add(p);
+			System.out.println("constructor");
+			salas.add(new Partida(con));
+			System.out.println("crea");
 		}
 		else {
 			boolean metido=false;
@@ -87,6 +66,9 @@ public class Sala implements Runnable{
 				if(salas.get(i).getJugador2()==null) {
 					salas.get(i).addPlayer(con);
 					metido=true;
+					System.out.println("segundo jugadors");
+					
+					salas.get(i).jugar();
 				}
 			}
 			if(metido==false) {
