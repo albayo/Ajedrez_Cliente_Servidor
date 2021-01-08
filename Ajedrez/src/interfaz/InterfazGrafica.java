@@ -19,6 +19,7 @@ import Piezas.Alfil;
 import Piezas.Caballo;
 import Piezas.Dama;
 import Piezas.Peon;
+import Piezas.Pieza;
 import Piezas.Posicion;
 import Piezas.Rey;
 import Piezas.Torre;
@@ -142,7 +143,8 @@ public class InterfazGrafica extends JPanel implements Serializable{
 		ventana.setVisible(true);
 	}
 	public void pintar() {
-		ventana.setVisible(true);
+		ventana.repaint();
+		//ventana.setVisible(true);
 	}
 	
 	public Casilla[] getCasillas() {
@@ -212,7 +214,8 @@ public class InterfazGrafica extends JPanel implements Serializable{
                 try{
                 	if(!movido) {
                 		c=mover(casillaMov);
-               
+                		System.out.println(movido);
+                		if(c!=null)movido=true;
                 	}  
                 	
                } catch(RuntimeException ex){
@@ -246,8 +249,9 @@ public class InterfazGrafica extends JPanel implements Serializable{
 	}
 	
 	public Casilla[] mover(Casilla[] cas) {
-		Casilla[] c=new Casilla[2];
+		c=new Casilla[2];
 		boolean enroque=true;
+		if(!movido) {
     	if(cas[0].getPieza() instanceof Rey) {
   
     		if(juego.estarEnJaque(juego.getTurno()) && (cas[1].getLetra()==1|| cas[1].getLetra()==5)) {
@@ -271,9 +275,17 @@ public class InterfazGrafica extends JPanel implements Serializable{
     		}
     		
     	}
-        if(juego.moverPieza(cas[0].getPieza(), new Posicion(cas[1].getNum(),cas[1].getLetra()))) {
-        	if(enroque && cas[1].getPieza() instanceof Rey) {
-        		
+    	
+//    	System.out.println("VA A MOVER");
+//    	System.out.println(cas[0].getPieza().getPosicion().getNum());
+//    	System.out.println(cas[0].getPieza().getPosicion().getLetra());
+//    	System.out.println(cas[1].getPieza().getPosicion().getNum());
+//    	System.out.println(cas[1].getPieza().getPosicion().getLetra());
+//        System.out.println(cas[0].getPieza() instanceof Peon);
+    	if(juego.moverPieza(juego.getTablero().getCasilla(cas[0].getNum(),cas[0].getLetra()).getPieza(), new Posicion(cas[1].getNum(),cas[1].getLetra()))) {
+
+        	if(enroque && juego.getTablero().getCasilla(cas[1].getNum(),cas[1].getLetra()).getPieza() instanceof Rey) {
+        		cas[1]=juego.getTablero().getCasilla(cas[1].getNum(),cas[1].getLetra());
         		if(cas[1].getLetra()==1 && cas[1].getNum()==0) {
         			juego.moverPieza(juego.getTablero().getCasilla(0, 0).getPieza(), new Posicion(0,2));
         			
@@ -291,7 +303,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
         			
         		}
         	}
-        	
+        	System.out.println(juego.getTablero().getTablero()[cas[1].getNum()][cas[1].getLetra()].getPieza() instanceof Pieza);
         	juego.cambiarTurno();
         	pintarTablero(juego);
         	
@@ -313,9 +325,12 @@ public class InterfazGrafica extends JPanel implements Serializable{
             casillaMov = null;
         	return c;
         }
-        else System.out.println("MUEVE BIEN");
+        else System.out.println("APRENDE A MOVER BIEN");
         casillaMov = null;
         return null;
+	}
+		System.out.println("No ha movido");
+		return null;
 	}
 	
 	public static void main(String[] args) {

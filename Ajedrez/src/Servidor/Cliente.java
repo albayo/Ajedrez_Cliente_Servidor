@@ -21,31 +21,42 @@ public class Cliente {
 			ObjectInputStream in =new ObjectInputStream (s.getInputStream());)
 		{
 			while(!i.fin() || i==null) {
-				System.out.println("antesd de leer");
+			
 				casillas=(Casilla[]) in.readObject();
-				System.out.println("leido");
+				
 				
 				if(!mostrado) {
 					i.mostrar();
 					mostrado=true;					
-					
-					if(casillas!=null)	i.mover(casillas);
+
+					if(casillas!=null)	{
+//						System.out.println("MUEVE");
+						i.setMovido(false);
+						i.mover(casillas);
+						i.setMovido(false);
+					}
 					
 					while(i.getMovido()==false) {
+						Thread.sleep(100);
+
 					}
 					casillas=i.getCasillas();
-					System.out.println("antes de enviar");
+					
 					out.writeObject(casillas);
-					System.out.println("enviar");
-					i.setMovido(false);
+					
 				}
 				else {
 					if(casillas!=null) {
+						i.setMovido(false);
 						i.mover(casillas);
-						while(i.getMovido()==false) {}
+						i.setMovido(false);
+						while(i.getMovido()==false) {
+							Thread.sleep(100);
+						}
+						
 						casillas=i.getCasillas();
 						out.writeObject(casillas);
-						i.setMovido(false);
+						
 					}
 				}		
 
@@ -70,6 +81,9 @@ public class Cliente {
 		catch(IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

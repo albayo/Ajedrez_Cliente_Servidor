@@ -56,12 +56,15 @@ public class Partida {
 			
 			while(!fin()) {
 				out1.writeObject(casillas);
-				System.out.println("antes de leer");
+				
 				casillas=(Casilla[]) in1.readObject();
+				i.setMovido(false);
 				i.mover(casillas);
-				System.out.println("primero");
+				
+				
 				out2.writeObject(casillas);
 				casillas=(Casilla[]) in2.readObject();
+				i.setMovido(false);
 				i.mover(casillas);
 				
 			}
