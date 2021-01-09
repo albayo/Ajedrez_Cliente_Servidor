@@ -165,24 +165,24 @@ public class InterfazGrafica extends JPanel implements Serializable{
                 casillaMov[0] = this.casilla;
                 casillaMov[1] = null;
                 if(!(casillaMov[0].getPieza() instanceof Vacia) && casillaMov[0].getPieza().getEquipo()==juego.getTurno()) {
-                	System.out.println("Primera casilla "+ casillaMov[0].getNum() 
-                			+"," +  casillaMov[0].getLetra() );
-                	System.out.println("Pieza: ");
-
-                	if(casillaMov[0].getPieza() instanceof Dama)
-                		System.out.println("Reina");
-                	if(casillaMov[0].getPieza() instanceof Vacia)
-                		System.out.println("NoPieza");
-                	if(casillaMov[0].getPieza() instanceof Rey)
-                		System.out.println("Rey");
-                	if(casillaMov[0].getPieza() instanceof Peon)
-                		System.out.println("Peon");
-                	if(casillaMov[0].getPieza() instanceof Caballo)
-                		System.out.println("Caballo");
-                	if(casillaMov[0].getPieza() instanceof Torre)
-                		System.out.println("Torre");
-                	if(casillaMov[0].getPieza() instanceof Alfil)
-                		System.out.println("Alfil");
+//                	System.out.println("Primera casilla "+ casillaMov[0].getNum() 
+//                			+"," +  casillaMov[0].getLetra() );
+//                	System.out.println("Pieza: ");
+//
+//                	if(casillaMov[0].getPieza() instanceof Dama)
+//                		System.out.println("Reina");
+//                	if(casillaMov[0].getPieza() instanceof Vacia)
+//                		System.out.println("NoPieza");
+//                	if(casillaMov[0].getPieza() instanceof Rey)
+//                		System.out.println("Rey");
+//                	if(casillaMov[0].getPieza() instanceof Peon)
+//                		System.out.println("Peon");
+//                	if(casillaMov[0].getPieza() instanceof Caballo)
+//                		System.out.println("Caballo");
+//                	if(casillaMov[0].getPieza() instanceof Torre)
+//                		System.out.println("Torre");
+//                	if(casillaMov[0].getPieza() instanceof Alfil)
+//                		System.out.println("Alfil");
                 }
                 else {
                 	System.out.println("Mueve una pieza de tu equipo");
@@ -192,29 +192,28 @@ public class InterfazGrafica extends JPanel implements Serializable{
                 
             } else if(casillaMov[1] == null){
                 casillaMov[1] = this.casilla;
-                System.out.println("Segunda casilla "+ casillaMov[1].getNum() 
-                        +"," +  casillaMov[1].getLetra() );
-
-
-                if(casillaMov[1].getPieza() instanceof Dama)
-                    System.out.println("Reina");
-                if(casillaMov[1].getPieza() instanceof Vacia)
-                    System.out.println("NoPieza");
-                if(casillaMov[1].getPieza() instanceof Rey)
-                    System.out.println("Rey");
-                if(casillaMov[1].getPieza() instanceof Peon)
-                    System.out.println("Peon");
-                if(casillaMov[1].getPieza() instanceof Caballo)
-                    System.out.println("Caballo");
-                if(casillaMov[1].getPieza() instanceof Torre)
-                    System.out.println("Torre");
-                if(casillaMov[1].getPieza() instanceof Alfil)
-                    System.out.println("Alfil");
+//                System.out.println("Segunda casilla "+ casillaMov[1].getNum() 
+//                        +"," +  casillaMov[1].getLetra() );
+//
+//
+//                if(casillaMov[1].getPieza() instanceof Dama)
+//                    System.out.println("Reina");
+//                if(casillaMov[1].getPieza() instanceof Vacia)
+//                    System.out.println("NoPieza");
+//                if(casillaMov[1].getPieza() instanceof Rey)
+//                    System.out.println("Rey");
+//                if(casillaMov[1].getPieza() instanceof Peon)
+//                    System.out.println("Peon");
+//                if(casillaMov[1].getPieza() instanceof Caballo)
+//                    System.out.println("Caballo");
+//                if(casillaMov[1].getPieza() instanceof Torre)
+//                    System.out.println("Torre");
+//                if(casillaMov[1].getPieza() instanceof Alfil)
+//                    System.out.println("Alfil");
 
                 try{
                 	if(!movido) {
                 		c=mover(casillaMov);
-                		System.out.println(movido);
                 		if(c!=null)movido=true;
                 	}  
                 	
@@ -303,7 +302,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
         			
         		}
         	}
-        	System.out.println(juego.getTablero().getTablero()[cas[1].getNum()][cas[1].getLetra()].getPieza() instanceof Pieza);
+        	//System.out.println(juego.getTablero().getTablero()[cas[1].getNum()][cas[1].getLetra()].getPieza() instanceof Pieza);
         	juego.cambiarTurno();
         	pintarTablero(juego);
         	
@@ -319,7 +318,7 @@ public class InterfazGrafica extends JPanel implements Serializable{
             else if(juego.ahogado(juego.getTurno()))
             	System.out.println("AHOGADO----TABLAS");
         	this.movido=true;
-        	System.out.println("movido->"+this.movido);
+        	
         	c[0]=cas[0];
             c[1]=cas[1];
             casillaMov = null;

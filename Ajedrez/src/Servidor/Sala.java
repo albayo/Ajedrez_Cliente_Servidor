@@ -56,9 +56,9 @@ public class Sala implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		if(salas.isEmpty()) {
-			System.out.println("constructor");
+		
 			salas.add(new Partida(con));
-			System.out.println("crea");
+		
 		}
 		else {
 			boolean metido=false;
@@ -66,7 +66,7 @@ public class Sala implements Runnable{
 				if(salas.get(i).getJugador2()==null) {
 					salas.get(i).addPlayer(con);
 					metido=true;
-					System.out.println("segundo jugadors");
+					
 					
 					salas.get(i).jugar();
 				}
