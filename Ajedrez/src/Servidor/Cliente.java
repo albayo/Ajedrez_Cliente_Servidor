@@ -1,14 +1,11 @@
 package Servidor;
 
-import java.awt.Dimension;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import Juego.Casilla;
 import interfaz.InterfazGrafica;
@@ -16,7 +13,6 @@ import interfaz.InterfazGrafica;
 public class Cliente {
 	public static void main(String[] args) {
 		boolean mostrado=false;
-		boolean turno;
 		Casilla [] casillas=new Casilla[2];
 		InterfazGrafica i=new InterfazGrafica();
 //		JLabel j=new JLabel("Oponente Desconectado");

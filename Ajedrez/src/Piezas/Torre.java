@@ -1,9 +1,9 @@
 package Piezas;
-import java.io.Serializable;
+
 
 import Juego.Tablero;
 
-public class Torre extends Pieza implements Serializable{
+public class Torre extends Pieza{
 	
 	public Torre(Posicion p,boolean e) {
 		super(e,p);

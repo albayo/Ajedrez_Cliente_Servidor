@@ -1,9 +1,8 @@
 package Piezas;
-import java.io.Serializable;
 
 import Juego.Tablero;
 
-public class Alfil extends Pieza implements Serializable{
+public class Alfil extends Pieza {
 	
 	public Alfil(Posicion p,boolean e) {
 		super(e,p);

@@ -1,6 +1,6 @@
 package Servidor;
 
-import java.io.DataInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,7 +15,7 @@ public class Partida {
 	private InterfazGrafica i;
 	private Casilla[] casillas;
 	private Player j1=null,j2=null;
-	private boolean turno;
+//	private boolean turno;
 
 	public InterfazGrafica getInterfaz() {
 		return i;
@@ -23,7 +23,7 @@ public class Partida {
 	public Partida(Socket s) {
 		if(j1==null) j1=new Player(s,true);
 		else j2=new Player(s,false);
-		turno=true;
+//		turno=true;
 
 	}
 	public void addPlayer(Socket s) {
@@ -64,11 +64,14 @@ public class Partida {
 				i.setMovido(false);
 				i.mover(casillas);
 
-
+				
 				out2.writeObject(casillas);
-				casillas=(Casilla[]) in2.readObject();
-				i.setMovido(false);
-				i.mover(casillas);
+				if(!fin()) {
+					casillas=(Casilla[]) in2.readObject();
+					i.setMovido(false);
+					i.mover(casillas);
+				}
+				
 
 			}
 
@@ -81,7 +84,7 @@ public class Partida {
 				if(i.getTurno())out2.writeObject(null);
 
 				else out1.writeObject(null);
-				e1.printStackTrace();
+				//e1.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

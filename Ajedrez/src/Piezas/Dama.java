@@ -1,9 +1,8 @@
 package Piezas;
-import java.io.Serializable;
 
 import Juego.Tablero;
 
-public class Dama extends Pieza implements Serializable{
+public class Dama extends Pieza {
 	
 	public Dama(Posicion p,boolean e) {
 		super(e,p);
